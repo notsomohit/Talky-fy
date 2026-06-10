@@ -1,8 +1,9 @@
-import asyncHandler from "../utils/async-handler.js"
+import { asyncHandler } from "../utils/async-handler.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-errors.js";
+import { generateToken } from "../utils/generateToken.js";
 
 export const signup = asyncHandler( async(req,res) => {
     const { username,email,password } = req.body;
@@ -25,7 +26,16 @@ export const signup = asyncHandler( async(req,res) => {
 
     const user = await User.findById(newUser._id).select("-password");
 
-    
+    const token = generateToken(newUser._id,res);
+
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            "user registered successfully",
+            { user:user }
+        )
+    );
+
 });
 
 export const login = asyncHandler( async(req,res) => {
