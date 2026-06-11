@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-errors.js";
 import { generateToken } from "../utils/generateToken.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const signup = asyncHandler( async(req,res) => {
     const { username,email,password } = req.body;
@@ -74,21 +75,39 @@ export const logout = (req,res) => {
 };
 
 export const updateProfile = asyncHandler(async (req, res) => {
-    const { username, email, avatar } = req.body;
 
-    const user = await User.findById(req.user._id);
+    const { avatar } = req.body;
+    if(!avatar){
+        throw new ApiError(400,"avatar is required");
+    }
 
-    if (!user) {
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+
+    if(!user){
         throw new ApiError(404, "User not found");
     }
- 
-    if (username) user.username = username;
-    if (email) user.email = email;
-    if (avatar) user.avatar = avatar;
-
-    await user.save();
-
-    const updatedUser = await User.findById(user._id).select("-password");
+    
+    //delete old avatars
+    if (user.avatarPublicId){
+        await cloudinary.uploader.destroy(user.avatarPublicId);
+    }
+    //upload new avatar
+    const uploadResponse = await cloudinary.uploader.upload(avatar);
+    
+    if (!uploadResponse?.secure_url){
+        throw new ApiError(500, "Failed to upload avatar");
+    }
+    
+    //update user
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        {
+            avatar:uploadResponse.secure_url,
+            avatarPublicId: uploadResponse.public_id
+        },
+        {new:true}
+    ).select("-password");
 
     return res.status(200).json(
         new ApiResponse(

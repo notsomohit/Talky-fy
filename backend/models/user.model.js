@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema(
             type:String,
             default:""
         },
+        avatarPublicId:{
+            type:String,
+            default:""
+        },
         isOnline:{
             type:Boolean,
             default:false
