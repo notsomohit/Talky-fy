@@ -39,9 +39,62 @@ export const signup = asyncHandler( async(req,res) => {
 });
 
 export const login = asyncHandler( async(req,res) => {
+    const { email,password } = req.body;
+    const user = await User.findOne({email})
+    
+    if(!user){
+        throw new ApiError(400,"invalid credentials");
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password,user.password);
+    if(!isPasswordCorrect){
+        throw new ApiError(400,"invalid credentials");
+    }
+
+    const token = generateToken(user._id,res);
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            "user logged in successfully",
+            { user:user }
+        )
+    );
+
 
 });
 
-export const logout = asyncHandler( async(req,res) => {
+export const logout = (req,res) => {
+    res.cookies("jwt","",{maxAge:0});
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            "user logged out successfully"
+        )
+    );
+};
 
-});
+export const updateProfile = asyncHandler(async (req, res) => {
+    const { username, email, avatar } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+ 
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (avatar) user.avatar = avatar;
+
+    await user.save();
+
+    const updatedUser = await User.findById(user._id).select("-password");
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            "Profile updated successfully",
+            updatedUser
+        )
+    );
+});   

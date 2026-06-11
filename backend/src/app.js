@@ -7,7 +7,7 @@ app.use(express.json()); //req.body
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-app.use("/v1/auth",authRouter);
+app.use("/api/auth",authRouter);
 
 
 export default app;
