@@ -1,6 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import { authRouter } from "../routes/auth.routes.js";
+import { arcjetMiddleware } from "../middleware/arcjet.middleware.js";
+
 const app = express();
 
 app.use(express.json()); //req.body

@@ -65,7 +65,7 @@ export const login = asyncHandler( async(req,res) => {
 });
 
 export const logout = (req,res) => {
-    res.cookies("jwt","",{maxAge:0});
+    res.cookie("jwt","",{maxAge:0});
     res.status(200).json(
         new ApiResponse(
             200,
@@ -87,7 +87,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
     if(!user){
         throw new ApiError(404, "User not found");
     }
-    
+
     //delete old avatars
     if (user.avatarPublicId){
         await cloudinary.uploader.destroy(user.avatarPublicId);

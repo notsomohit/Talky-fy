@@ -1,0 +1,26 @@
+import { ARCJET_KEY } from "../config/env.js";
+import arcjet, { shield, detectBot, tokenBucket,slidingWindow } from "@arcjet/node";
+
+export const aj = arcjet({
+
+  key: ARCJET_KEY,
+  rules: [
+    // Shield protects your app from common attacks e.g. SQL injection
+    shield({ mode: "LIVE" }),
+    // Create a bot detection rule
+    detectBot({
+      mode: "LIVE", // Blocks requests. Use "DRY_RUN" to log only
+      // Block all bots except the following
+      allow: [
+        "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc
+      ],
+    }),
+    // Create a token bucket rate limit. Other algorithms are supported.
+    slidingWindow({
+        mode:"LIVE",
+        max:100,
+        interval:60,
+    }),
+  ],
+});
+
