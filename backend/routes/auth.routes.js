@@ -6,7 +6,7 @@ import { arcjetMiddleware } from "../middleware/arcjet.middleware.js";
 
 export const authRouter = Router();
 
-authRouter.use(arcjetMiddleware);
+// authRouter.use(arcjetMiddleware);
 
 // authRouter.get("/test",arcjetMiddleware,(req,res)=>{
 //     res.status(200).json({message:"test route"})
