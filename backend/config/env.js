@@ -13,5 +13,6 @@ export const {
     CLOUDINARY_API_SECRET,
     CLOUDINARY_URL,
     ARCJET_KEY,
-    ARCJET_ENV
+    ARCJET_ENV,
+    CLIENT_URL,
 } = process.env;
