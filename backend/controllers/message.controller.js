@@ -48,3 +48,20 @@ export const sendMessage = asyncHandler(async (req,res)=>{
     res.status(200).json(new ApiResponse(200,"message sent succesfully",{newMessage}));
 
 });
+
+export const getChatPartners = asyncHandler(async (req,res) => {
+    const loggedInUserId = req.user._id;
+    
+    const messages = await Message.find({
+        $or:[{senderId:loggedInUserId},{receiverId:loggedInUserId}]
+    });
+    
+    const chatPartnerIds = messages.map((msg)=>{
+       return msg.senderId.toString() === loggedInUserId.toString() ? msg.receiverId.toString() : msg.senderId.toString();
+    });
+
+    const chatPartners = await User.find({_id:{$in:chatPartnerIds}}).select("-password");
+    
+    res.status(200).json(new ApiResponse(200,"chat partners fetched succesfully",{chatPartners}));
+
+});

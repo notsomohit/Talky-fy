@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 app.use("/api/auth",authRouter);
-app.use("/api/message",protectRoute,messageRouter);
+app.use("/api/message",messageRouter);
 
 
 export default app;
