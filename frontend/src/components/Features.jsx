@@ -40,7 +40,7 @@ export default function Features() {
   return (
     <section
         id="features"
-        className="relative z-20 mx-auto -mt-24 max-w-screen-xl px-4 pb-20 pt-32 sm:px-6 lg:px-8"
+        className="relative z-20 mx-auto -mt-24 max-w-7xl px-4 pb-12 pt-32 sm:px-6 lg:px-8"
     >
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">

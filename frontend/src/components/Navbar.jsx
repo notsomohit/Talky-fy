@@ -54,7 +54,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 px-4 py-4">
       <nav
-        className={`mx-auto flex max-w-screen-xl items-center justify-between rounded-full border px-6 py-3 transition-all duration-300 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-6 py-3 transition-all duration-300 ${
           isScrolled
             ? "border-white/60 bg-white/70 shadow-[0_10px_40px_rgba(0,0,0,0.08)] backdrop-blur-2xl dark:border-zinc-800 dark:bg-zinc-900/70 dark:shadow-none"
             : "border-transparent bg-transparent"
@@ -67,7 +67,7 @@ export default function Navbar() {
           className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white"
         >
           Talky
-          <span className="bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
             Fy
           </span>
         </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
 
       {isOpen && (
-        <div className="mx-auto mt-3 max-w-screen-xl overflow-hidden rounded-3xl border border-zinc-200 bg-white/90 p-6 shadow-xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 md:hidden">
+        <div className="mx-auto mt-3 max-w-7xl overflow-hidden rounded-3xl border border-zinc-200 bg-white/90 p-6 shadow-xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 md:hidden">
           <div className="flex flex-col gap-6">
             {navLinks.map((item) => (
               <a

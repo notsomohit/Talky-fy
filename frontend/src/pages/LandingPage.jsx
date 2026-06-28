@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Footer from "../components/Footer";
+import CTA from "../components/Cta";
 
 export default function LandingPage() {
   return (
@@ -9,6 +10,7 @@ export default function LandingPage() {
       <Navbar />
       <Hero />
       <Features/>
+      <CTA/>
       <Footer/>
     </main>
   );

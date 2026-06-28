@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="mt-32 border-t border-zinc-200 bg-stone-100 dark:border-zinc-800 dark:bg-zinc-950">
+    <footer className="mt-16 border-t border-zinc-200 bg-stone-100 dark:border-zinc-800 dark:bg-zinc-950">
       <div className="mx-auto max-w-7xl px-6 py-16">
 
         <div className="grid gap-12 md:grid-cols-2">
@@ -17,7 +17,7 @@ export default function Footer() {
               className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white"
             >
               Talky
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
                 Fy
               </span>
             </Link>

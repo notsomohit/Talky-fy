@@ -23,7 +23,7 @@ export default function Hero() {
         />
 
         {/* Fade so image blends into white */}
-        <div className="absolute inset-x-0 top-10 z-20 h-150 bg-linear-to-b from-white via-white via-white/100 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:via-32% dark:to-transparent" />  
+        <div className="absolute inset-x-0 top-10 z-20 h-150 bg-linear-to-b from-white via-white via-white to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:via-32% dark:to-transparent" />  
         {/* Fade into page background */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-b from-transparent to-stone-100/70 dark:to-zinc-950/70" />
         {/* Blue glow */}
@@ -38,7 +38,7 @@ export default function Hero() {
           <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl lg:text-6xl xl:text-7xl">
             Conversations,
             <br />
-            made <span className="text-blue-600">effortless.</span>
+            made <span className="text-blue-500">effortless.</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-600 dark:text-zinc-400 sm:text-lg">
